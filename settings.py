@@ -85,7 +85,6 @@ INSTALLED_APPS = APPS_CORE + \
     APPS_ADMIN + \
     APPS_STAFF + \
     APPS_REVERSION + \
-    APPS_STORIES + \
     APPS_CALLOWAY_DEFAULT + \
     APPS_MPTT + \
     APPS_CATEGORIES + \
@@ -94,10 +93,13 @@ INSTALLED_APPS = APPS_CORE + \
     APPS_MEDIA + \
     APPS_UTILS + \
     APPS_REGISTRATION + \
-    APPS_TINYMCE 
+    APPS_TINYMCE + \
+    (
+        "viewpoint",
+    )
 
 ADMIN_TOOLS_THEMING_CSS = 'admin/css/theming.css'
-# ADMIN_TOOLS_MENU = 'menu.CustomMenu'
+ADMIN_TOOLS_MENU = 'menu.CustomMenu'
 
 TINYMCE_JS_URL = '%sjs/tiny_mce/tiny_mce.js' % STATIC_URL
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'js/tiny_mce')
