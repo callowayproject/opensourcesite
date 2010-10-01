@@ -1,6 +1,8 @@
 # These are your project's requirements and you should change them
 # to meet any customizations you wish to implement
 
+--extra-index-url=http://opensource.washingtontimes.com/pypi/simple/
+
 django
 calloway
 
