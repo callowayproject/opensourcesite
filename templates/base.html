@@ -4,7 +4,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>{% if SITE_NAME %}{{ SITE_NAME }} : {% endif %}{% block head_title %}{% endblock %}</title>
-		<link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" />
         <link rel="stylesheet" href="{{ STATIC_URL }}css/uni-form.css" />
         {% block extra_head_base %}
@@ -13,45 +12,56 @@
     </head>
     
     <body class="{% block body_class %}{% endblock %}">
-		<div id="wrapper">
-        {% if site_wide_announcements %}
-            <div id="site_wide_announcements">
-                <ul>
-                    {% for announcement in site_wide_announcements %}
-                    <li>
-                        <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> -
-                        <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "Hide announcement" %}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-        
+		<div id="hat">
+	        {% if site_wide_announcements %}
+	            <div id="announcements">
+	                <ul>
+	                    {% for announcement in site_wide_announcements %}
+	                    <li>
+	                        <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> -
+	                        <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">{% trans "Hide announcement" %}</a>
+	                    </li>
+	                    {% endfor %}
+	                </ul>
+	            </div>
+	        {% endif %}
+	        {% if messages %}
+			<div class="mod">
+	            <ul id="messages">
+	                {% for message in messages %}
+	                <li id="message_{{ forloop.counter }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+	                    <a href="#"><small>{% trans "clear" %}</small></a>
+	                    {{ message }}
+	                </li>
+	                {% endfor %}
+	            </ul>
+			</div>
+	        {% endif %}
+		{% block body_hat %}{% block member_opts %}{% endblock %}
+		{% endblock %}
+		</div>
         {% block body_outer %}
-		<div id="pagecontainer">
-        <div id="body">
-            {% if messages %}
-                <ul id="messages">
-                    {% for message in messages %}
-                    <li id="message_{{ forloop.counter }}"{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                        <a href="#"><small>{% trans "clear" %}</small></a>
-                        {{ message }}
-                    </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-            {% block site_header %}{% endblock %}
-			{% block content_nav %}{% endblock %}
-			{% block member_opts %}{% endblock %}
-			{% block search %}{% endblock %}
-            {% block body %}{% endblock %}
-        </div> {# body #}
-		</div> {# pagecontainer #}
-		</div> {# wrapper #}
+		<div id="container" class="round6 ltshadow">
+			<div id="header">
+				{% block site_header %}{% endblock %}
+            </div>
+	        <div id="main">
+				<div class="mod">
+				{% block content_nav %}{% endblock %}
+				{% block search %}{% endblock %}
+	            {% block body %}{% endblock %}
+				</div>
+	        </div> {# main #}
+			<div id="sidebar">
+				{% block sidebar %}
+					&nbsp;
+				{% endblock %}
+			</div>
+			<div id="footer">{% block footer %}{% endblock %}</div>
+		</div> {# container #}
 
         {% endblock %}
         
-        <div id="footer">{% block footer %}{% endblock %}</div>
         
         <script src="{{ STATIC_URL }}js/uni-form.jquery.js" type="text/javascript"></script>
         {% block extra_body_base %}
