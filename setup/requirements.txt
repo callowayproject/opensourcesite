@@ -7,3 +7,7 @@ django
 calloway
 
 -r calloway_reqs.txt
+
+django-profiles==0.2
+django-tagging-ext==0.2.0
+django-disqus==0.3.3
