@@ -44,31 +44,25 @@
 		{% endblock %}
 		</div>
         {% block body_outer %}
-		<div id="container" class="round6 ltshadow">
-			<div id="header">
-				{% block site_header %}{% endblock %}
-            </div>
-	        <div id="main">
-				<div class="mod">
-				{% block content_nav %}{% endblock %}
-				{% block search %}{% endblock %}
-	            {% block body %}{% endblock %}
-				</div>
-	        </div> {# main #}
-			<div id="sidebar">
-				{% block sidebar %}
-					&nbsp;
-				{% endblock %}
-			</div>
-			<div id="footer">{% block footer %}{% endblock %}</div>
+		<div class="container">
+		<div id="header">
+			{% block site_header %}{% endblock %}
+        </div>
+		<div id="sidebar" class="c230 left">
+			{% block sidebar %}&nbsp;{% endblock %}
+		</div>
+        <div id="main" class="c600 left rc-bl rc-br">
+			{% block content_nav %}{% endblock %}
+			{% block search %}{% endblock %}
+            {% block body %}{% endblock %}
+        </div> {# main #}
+		<div id="footer">{% block footer %}{% endblock %}</div>
 		</div> {# container #}
-
         {% endblock %}
-        
-        
-        <script src="{{ STATIC_URL }}js/uni-form.jquery.js" type="text/javascript"></script>
+        <script src="{{ STATIC_URL }}js/hyphenator.js" type="text/javascript"></script>
         {% block extra_body_base %}
             {% block extra_body %}{% endblock %}
         {% endblock %}
     </body>
 </html>
+{%endspaceless%}
