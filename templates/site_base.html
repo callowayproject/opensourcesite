@@ -1,32 +1,39 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load analytics %}
-{% block site_header %}<div id="masthead"><h1 id="logo">Daily Times</h1></div>{% endblock %}
+{% load native %}
+{% block extra_head %}
+{% endblock %}
+{% block body_hat %}{% endblock %} {# block hat #}
+{% block site_header %}{% endblock %}
 {% block content_nav %}{% endblock %}
-{% block member_opts %}{% if user.is_authenticated %}
-<p>Hello {{ user.first_name }}!</p>
-<ul class="member_opts">
-	<li><a href="{% url auth_logout %}">Logout</a></li>
-	<li><a href="{% url auth_password_change %}">Change Password</a></li>
-	<li><a href="{% url profiles_edit_profile %}">Edit Profile</a></li>
-	{# <li><a href="{% url profiles_profile_detail %}">View Profile</a></li> #}
-</ul>
-{% else %}
-<p>Hello Guest</p>
-<ul class="member_opts">
-	<li><a href="{% url auth_login %}">Sign In</a></li>
-	<li><a href="{% url registration_register %}">Join</a></li>
-</ul>
-{% endif %}{% endblock %}
 {% block search %}{% endblock %}
-
+{% block sidebar %}
+<img src="{{ STATIC_URL}}/images/osheading.png" width="180" height="205" alt="We're Open" />
+<h1 class="sitehead mb">Open Source at The Washington Times</h1>
+	<div id="menu_container">
+	<ul id="sbmenu">
+		<li><a href="/" title="Home"><img src="/media/static/images/icons/house.png" alt="Home" width="16" height="16" />Home</a></li>
+		<li class="closed"><a href="{% url viewpoint_blog_detail 'default' %}" class="title"><img src="/media/static/images/icons/folder_page_white.png" alt="Articles" width="16" height="16" />Articles</a>
+			<ul style="display: none">
+				<li><a href="{% url viewpoint_blog_archive_year 'default' 2009 %}">2009</a></li>
+				<li><a href="{% url viewpoint_blog_archive_year 'default' 2010 %}">2010</a></li>
+			</ul>
+		</li>
+		<li class="closed"><a href="#"><img src="/media/static/images/icons/tag_yellow.png" alt="Topics" width="16" height="16" />Article Topics</a></li>
+		<li class="closed"><a href="#"><img src="/media/static/images/icons/group.png" alt="Team Members" width="16" height="16" />Team Members</a>
+			<ul style="display: none">{% staff_members as staffmembers %}{% for staff in staffmembers %}
+				<li><a href="{{staff.get_absolute_url}}">{{staff.get_full_name}}</a></li>
+			{% endfor %}</ul>
+		</li>
+		<li class="open"><a href="#"><img src="/media/static/images/icons/package.png" alt="Projects" width="16" height="16" />Projects</a>
+		</li>
+	</ul>
+	</div>
+{% endblock %}
 {% block footer %}
 <div class="legal">
-    {% trans "&copy; 2010 &lt;your company here&gt;" %}
-    {# - <a href="{% url about %}">{% trans "About" %}</a> #}
-    {# - <a href="{% url terms %}">{% trans "Terms of Service" %}</a> #}
-    {# - <a href="{% url privacy %}">{% trans "Privacy Policy" %}</a> #}
-    {# - <a href="{% url dmca %}">{% trans "DMCA Notice" %}</a> #}
+	&copy; {% now "Y" %} The Washington Times
 </div>
 {% endblock %}
 {% block extra_body_base %}
