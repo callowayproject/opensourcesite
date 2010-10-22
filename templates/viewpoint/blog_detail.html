@@ -1,0 +1,41 @@
+{% extends "viewpoint/viewpoint_base.html" %}
+{% load native %}
+{% load tagging_tags %}
+{% load typogrify %}
+{% block content %}
+<h1>Entries</h1>
+<div class="module mb">
+	<div class="module mt left c180 p10">
+		<h3 class="mb">By Date</h3>
+		{% blog_entry_yearmonths object as dates %}
+		<ul>{% for item in dates %}
+			<li><a href="{% url viewpoint_blog_archive_year object item.year %}{{ item|date:"M"|lower }}/">{{ item.year }} {{ item|date:"F" }}</a></li>
+		{% endfor %}</ul>
+	</div>
+	<div class="module mt left c180 p10">
+		<h3 class="mb">By Topic</h3>
+		{% tags_for_model viewpoint.entry as entry_tags %}
+		<ul>
+		{% for tag in entry_tags %}
+			<li><img src="/media/static/images/icons/tag_yellow.png" alt="Topics" width="16" height="16" />
+				<a href="{% url tagging_ext_tag tag %}">{{tag}}</a>
+			</li>
+		{% endfor %}</ul>
+	</div>
+	<div class="module mt left c180 p10">
+		<h3 class="mb">By Author</h3>
+		<ul>
+			{% blog_authors object as authors %}
+			{% for author in authors %}
+			<li><a href="{{ author.get_absolute_url }}">{{author}}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+<div class="module mt full clear-b">
+	<h3 class="mb">Most Recent</h3>
+	{% for entry in object.entry_set.published|slice:":5" %}
+		{% include "viewpoint/entry_list_item.html" %}
+	{% endfor %}
+</div>
+{% endblock %}

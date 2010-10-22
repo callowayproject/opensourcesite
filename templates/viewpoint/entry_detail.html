@@ -1,0 +1,38 @@
+{% extends "viewpoint/viewpoint_base.html" %}
+{% load tagging_tags typogrify transmogrifiers disqus_tags %}
+{% block content %}
+<div class="blogs">
+{% if object.photo %}
+	<div class="imgcontainer" style="width: 600px">
+	<img src="{% resize object.photo.url 600 %}" alt="{{ object.title }}{% if object.credit %} {{object.credit}}" class="no-margin" {% else %} class="no-margin mb" {% endif %} />
+	{% if object.credit %}
+		<div class="small caption full">Photo by {{ object.credit|safe }}</div>
+	{% endif %}
+	</div>
+{% endif %}
+<h1 class="min mb big sans"><a href="{{ object.get_absolute_url }}">{{ object.title|titlecase|typogrify }}</a></h1>
+<p>
+	by <a href="{{ object.author.get_absolute_url }}">{{ object.author }}</a>&nbsp;&bull;&nbsp;
+	<span class="grey">Published {{ object.pub_date.day }} {{ object.pub_date|date:"M" }} {{ object.pub_date|date:"Y" }}</span>
+	{% if request.user.staffmember_set.all.0 in object.blog.owners.all %}
+		<a href="{% url admin:viewpoint_entry_change object.id %}" class="button">Edit</a>
+	{% endif %}
+</p>
+<div class="hyphenate">{{ object.body|safe|typogrify }}</div>
+<script type="text/javascript">
+	tweetmeme_style = 'compact';
+	tweetmeme_source = 'washtimes';
+	tweetmeme_service = 'bit.ly';
+	service_api = 'R_a6895e4a6af44aa36a49080184db916a';
+</script>
+<script type="text/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script>
+
+</div>
+<div id="comments">
+{% disqus_dev %}
+{% disqus_show_comments %}
+</div>
+{% endblock %}
+{% block extra_body_base %}
+	{{ block.super }}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% load transmogrifiers typogrify tagging_tags %}
+<div class="left mb bb thick">
+	{% if entry.photo %}
+		<div class="imgcontainer" style="width: 600px">
+		<img src="{% resize entry.photo.url 600 %}" alt="{{ entry.title }}{% if entry.credit %} {{entry.credit}}" class="no-margin" {% else %} class="no-margin mb" {% endif %} />
+		{% if entry.credit %}
+			<p class="small caption full" style="text-align: right">{{ entry.credit|safe }}</p>
+		{% endif %}
+		</div>
+	{% endif %}
+	<h1 class="min mb big sans"><a href="{{ entry.get_absolute_url }}">{{ entry.title|titlecase|typogrify }}</a></h1>
+	<p>by <a href="{{ entry.author.get_absolute_url }}">{{ entry.author }}</a>&nbsp;&bull;&nbsp;<span class="grey">Published {{ entry.pub_date.day }} {{ entry.pub_date|date:"M" }} {{ entry.pub_date|date:"Y" }}</span></p>
+	<p class="mb">{% if entry.tease %}
+		{{ entry.tease|typogrify }}
+	{% else %}
+		{{ entry.body|typogrify|truncatewords:"20" }}
+	{% endif %}
+	</p>
+	<p><a href="{{ entry.get_absolute_url }}#comments"><img src="{{ STATIC_URL}}images/icons/comments.png" width="16" height="16" alt="comments" />99 comments</a> 99 Diggs 99 Whatevers</p>
+	<p class="mb">
+		{% tags_for_object entry as tags %}
+		<img src="{{ STATIC_URL }}/images/icons/tag_yellow.png" width="16" height="16" />
+		{% for tag in tags %}
+			{% if not forloop.last %}
+				<a href="/post/tags/{{ tag.slug }}/">{{ tag }}</a> - 
+			{% else %}
+				<a href="/post/tags/{{ tag.slug }}/">{{ tag }}</a>
+			{% endif %}
+		{% endfor %}
+	</p>
+</div>

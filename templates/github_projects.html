@@ -1,0 +1,7 @@
+{% load native typogrify %}
+{% github_projects as projects %}
+<ul class="projects">
+{% for proj in projects %}
+	<li><a href="{{ proj.url }}">{{ proj.name }}</a><p class="small line-small">{{proj.description|typogrify}}</p></li>
+{% endfor %}
+</ul>
