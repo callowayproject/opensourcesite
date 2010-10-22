@@ -116,13 +116,68 @@ INSTALLED_APPS = APPS_CORE + \
     APPS_TINYMCE + \
     (
         "viewpoint",
+        "profiles",
+        "typogrify",
+        "transmogrify",
+        "tagging_ext",
+        'disqus',
     )
+
+TEMPLATE_CONTEXT_PROCESSORS = [
+    'django.core.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.request',
+    'context_processors.global_settings',
+    'staticmediamgr.context_processor.static_url',
+]
 
 ADMIN_TOOLS_THEMING_CSS = 'admin/css/theming.css'
 ADMIN_TOOLS_MENU = 'menu.CustomMenu'
 
 TINYMCE_JS_URL = '%sjs/tiny_mce/tiny_mce.js' % STATIC_URL
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'js/tiny_mce')
+
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.version.VersionDebugPanel',
+    'debug_toolbar.panels.timer.TimerDebugPanel',
+    # 'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+    # 'debug_toolbar.panels.headers.HeaderDebugPanel',
+    # 'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    # 'debug_toolbar.panels.template.TemplateDebugPanel',
+    # 'debug_toolbar.panels.sql.SQLDebugPanel',
+    # 'debug_toolbar.panels.logger.LoggingPanel',
+)
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False
+}
+
+NATIVE_TAGS = (
+    'apps.tags',
+)
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': "advanced",
+    'relative_urls': False,
+    'plugins': "safari,paste,advimage,advlink,preview,fullscreen,searchreplace,icode",
+    'theme_advanced_toolbar_location' : "top",
+    'theme_advanced_toolbar_align' : "left",
+    'theme_advanced_buttons1' : "formatselect,bold,italic,underline,strikethrough,blockquote,|,bullist,numlist,|,link,unlink,|,charmap,image,media,pastetext,pasteword,search,replace,icode,|,code,fullscreen,preview",
+    'theme_advanced_buttons2' : "",
+    'theme_advanced_buttons3' : "",
+    'theme_advanced_statusbar_location' : "bottom",
+    'width': "600",
+    'height': "600",
+}
+
+# TINYMCE_ADMIN_FIELDS = {
+#     'stories.story': ('body',),
+#     'staff.staffmember': ('bio',),
+#     'flatpages.flatpage': ('content',),
+# }
+
+
 
 try:
     from local_settings import *
