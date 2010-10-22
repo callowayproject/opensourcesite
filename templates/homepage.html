@@ -1,0 +1,15 @@
+{% extends "site_base.html" %}
+{% load tagging_tags typogrify transmogrifiers %}
+
+{% block head_title %}Home{% endblock %}
+{% block body %}
+	<div class="entrylist">
+	{% for entry in entries %}
+		{% if forloop.first %}
+			{% include "viewpoint/entry_list_first.html" %}
+		{% else %}
+			{% include "viewpoint/entry_list_item.html" %}
+		{% endif %}
+	{% endfor %}
+	</div>
+{% endblock %}
