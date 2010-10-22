@@ -55,7 +55,27 @@ try:
     from local_settings import STATIC_ROOT
 except ImportError:
     STATIC_ROOT = os.path.join(MEDIA_ROOT_PREFIX, 'static')
-    
+
+MIDDLEWARE_CLASSES = [
+    'django.middleware.cache.UpdateCacheMiddleware', 
+    'django.middleware.common.CommonMiddleware', 
+    'django.contrib.sessions.middleware.SessionMiddleware', 
+    'django.middleware.csrf.CsrfViewMiddleware', 
+    'django_ext.middleware.cookie.UsernameInCookieMiddleware', 
+    'django.contrib.auth.middleware.AuthenticationMiddleware', 
+    'django.contrib.messages.middleware.MessageMiddleware', 
+    #'django.middleware.gzip.GZipMiddleware', 
+    'django.middleware.http.ConditionalGetMiddleware', 
+    'django.middleware.csrf.CsrfResponseMiddleware', 
+    'django.middleware.doc.XViewMiddleware', 
+    #'debug_toolbar.middleware.DebugToolbarMiddleware', 
+    'django.contrib.redirects.middleware.RedirectFallbackMiddleware', 
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware', 
+    'django.middleware.transaction.TransactionMiddleware', 
+    'pagination.middleware.PaginationMiddleware', 
+    'ban.middleware.DenyMiddleware', 
+    'django.middleware.cache.FetchFromCacheMiddleware',
+]
 
 MEDIA_URL = '%suploads/' % MEDIA_URL_PREFIX
 STATIC_URL = "%sstatic/" % MEDIA_URL_PREFIX
