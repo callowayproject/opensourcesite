@@ -1,29 +1,29 @@
-{% load transmogrifiers typogrify tagging_tags %}
+{% load transmogrifiers typogrify tagging_tags native %}
 <div class="entry mb clear-b">
 	{% if entry.photo %}
-		<img src="{% resize entry.photo.url 100 %}" alt="{{entry.title}}" class="entrylist left">
+		{% smart_size entry.photo 100x100 alt=entry.title class="entrylist left" %}
+		{# <img src="{% resize entry.photo.url 100 %}" alt="{{entry.title}}" class="entrylist left"> #}
 	{% endif %}
 	<div class="entrytease">
 		<h3 class="mb min sans">
 			<a href="{{ entry.get_absolute_url }}">{{ entry.title|titlecase|typogrify }}</a>
 		</h3>
-		<p>by <a href="{{ entry.author.get_absolute_url }}">{{ entry.author }}</a></p>
+		<p>by <a href="{{ entry.author.get_absolute_url }}">{{ entry.author }}</a>&nbsp;&bull;&nbsp;Published {{ entry.pub_date.day }} {{ entry.pub_date|date:"M" }} {{ entry.pub_date|date:"Y" }}</p>
 		<p class="mb">{% if entry.tease %}
 			{{ entry.tease|typogrify }}
 		{% else %}
 			{{ entry.body|typogrify|truncatewords:"20" }}
-		{% endif %}<span class="grey">Published {{ entry.pub_date.day }} {{ entry.pub_date|date:"M" }} {{ entry.pub_date|date:"Y" }}</span>
-		</p>
+		{% endif %}</p>
 		<p href="{{ entry.get_absolute_url }}#comments"><img src="{{ STATIC_URL}}images/icons/comments.png" width="16" height="16" alt="comments" />99 comments</a> 99 Diggs 99 Whatevers</p>
 		<div class="tags">
 			{% tags_for_object entry as tags %}
 			<img src="{{ STATIC_URL }}/images/icons/tag_yellow.png" width="16" height="16" />
 			{% for tag in tags %}
-	           	{% if not forloop.last %}
-	           		<a href="/post/tags/{{ tag.slug }}/">{{ tag }}</a> - 
-	           	{% else %}
-	           		<a href="/post/tags/{{ tag.slug }}/">{{ tag }}</a>
-	           	{% endif %}
+				{% if not forloop.last %}
+					<a href="/post/tags/{{ tag.slug }}/">{{ tag }}</a> - 
+				{% else %}
+					<a href="/post/tags/{{ tag.slug }}/">{{ tag }}</a>
+				{% endif %}
 			{% endfor %}
 		</div>
 	</div>

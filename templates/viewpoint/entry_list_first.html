@@ -4,12 +4,12 @@
 		<div class="imgcontainer" style="width: 600px">
 		<img src="{% resize entry.photo.url 600 %}" alt="{{ entry.title }}{% if entry.credit %} {{entry.credit}}" class="no-margin" {% else %} class="no-margin mb" {% endif %} />
 		{% if entry.credit %}
-			<p class="small caption full" style="text-align: right">{{ entry.credit|safe }}</p>
+			Photo by <p class="small caption full" style="text-align: right">{{ entry.credit|safe }}</p>
 		{% endif %}
 		</div>
 	{% endif %}
 	<h1 class="min mb big sans"><a href="{{ entry.get_absolute_url }}">{{ entry.title|titlecase|typogrify }}</a></h1>
-	<p>by <a href="{{ entry.author.get_absolute_url }}">{{ entry.author }}</a>&nbsp;&bull;&nbsp;<span class="grey">Published {{ entry.pub_date.day }} {{ entry.pub_date|date:"M" }} {{ entry.pub_date|date:"Y" }}</span></p>
+	<p>by <a href="{{ entry.author.get_absolute_url }}">{{ entry.author }}</a>&nbsp;&bull;&nbsp;Published {{ entry.pub_date.day }} {{ entry.pub_date|date:"M" }} {{ entry.pub_date|date:"Y" }}</p>
 	<p class="mb">{% if entry.tease %}
 		{{ entry.tease|typogrify }}
 	{% else %}

@@ -1,5 +1,6 @@
 {% extends "viewpoint/viewpoint_base.html" %}
 {% load tagging_tags typogrify transmogrifiers disqus_tags %}
+{% block head_title %}{{ object.title }}{% endblock %}
 {% block content %}
 <div class="blogs">
 {% if object.photo %}
@@ -10,12 +11,12 @@
 	{% endif %}
 	</div>
 {% endif %}
-<h1 class="min mb big sans"><a href="{{ object.get_absolute_url }}">{{ object.title|titlecase|typogrify }}</a></h1>
+<h1 class="min mb big sans">{{ object.title|titlecase|typogrify }}</h1>
 <p>
 	by <a href="{{ object.author.get_absolute_url }}">{{ object.author }}</a>&nbsp;&bull;&nbsp;
-	<span class="grey">Published {{ object.pub_date.day }} {{ object.pub_date|date:"M" }} {{ object.pub_date|date:"Y" }}</span>
+	Published {{ object.pub_date.day }} {{ object.pub_date|date:"M" }} {{ object.pub_date|date:"Y" }}
 	{% if request.user.staffmember_set.all.0 in object.blog.owners.all %}
-		<a href="{% url admin:viewpoint_entry_change object.id %}" class="button">Edit</a>
+		&nbsp;<a href="{% url admin:viewpoint_entry_change object.id %}" class="button" target="_blank">Edit</a>
 	{% endif %}
 </p>
 <div class="hyphenate">{{ object.body|safe|typogrify }}</div>
@@ -32,7 +33,4 @@
 {% disqus_dev %}
 {% disqus_show_comments %}
 </div>
-{% endblock %}
-{% block extra_body_base %}
-	{{ block.super }}
 {% endblock %}

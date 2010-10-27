@@ -2,14 +2,18 @@
 {% load native %}
 {% load tagging_tags %}
 {% load typogrify %}
+{% block head_title %}Browse Articles{% endblock %}
 {% block content %}
-<h1>Entries</h1>
+<h1>Browse Articles</h1>
 <div class="module mb">
 	<div class="module mt left c180 p10">
 		<h3 class="mb">By Date</h3>
 		{% blog_entry_yearmonths object as dates %}
 		<ul>{% for item in dates %}
-			<li><a href="{% url viewpoint_blog_archive_year object item.year %}{{ item|date:"M"|lower }}/">{{ item.year }} {{ item|date:"F" }}</a></li>
+			<li>
+				<a href="{% url viewpoint_blog_archive_year item.year %}{{ item|date:"M"|lower }}/">
+				<img src="/media/static/images/icons/calendar.png" alt="Topics" width="16" height="16" class="icon" />
+				{{ item.year }} {{ item|date:"F" }}</a></li>
 		{% endfor %}</ul>
 	</div>
 	<div class="module mt left c180 p10">
@@ -17,19 +21,25 @@
 		{% tags_for_model viewpoint.entry as entry_tags %}
 		<ul>
 		{% for tag in entry_tags %}
-			<li><img src="/media/static/images/icons/tag_yellow.png" alt="Topics" width="16" height="16" />
-				<a href="{% url tagging_ext_tag tag %}">{{tag}}</a>
+			<li>
+				<a href="{% url tagging_tag tag %}">
+					<img src="/media/static/images/icons/tag_yellow.png" alt="Topics" width="16" height="16" class="icon" />
+					{{ tag }}
+				</a>
 			</li>
 		{% endfor %}</ul>
 	</div>
 	<div class="module mt left c180 p10">
 		<h3 class="mb">By Author</h3>
-		<ul>
-			{% blog_authors object as authors %}
-			{% for author in authors %}
-			<li><a href="{{ author.get_absolute_url }}">{{author}}</a></li>
-			{% endfor %}
-		</ul>
+		{% blog_authors object as authors %}
+		<ul>{% for author in authors %}
+			<li>
+				<a href="{{ author.get_absolute_url }}">
+					<img src="/media/static/images/icons/user.png" alt="Topics" width="16" height="16" class="icon" />
+					{{author}}
+				</a>
+			</li>
+		{% endfor %}</ul>
 	</div>
 </div>
 <div class="module mt full clear-b">

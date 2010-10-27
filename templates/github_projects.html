@@ -1,7 +1,13 @@
+{% extends 'site_base.html' %}
 {% load native typogrify %}
+{% block head_title %}Our Open Source Projects{% endblock %}
+{% block body %}
+<h1>Our Open Source Projects</h1>
 {% github_projects as projects %}
-<ul class="projects">
+<dl>
 {% for proj in projects %}
-	<li><a href="{{ proj.url }}">{{ proj.name }}</a><p class="small line-small">{{proj.description|typogrify}}</p></li>
+	<dt><a href="{{ proj.url }}">{{ proj.name }}</a></dt>
+	<dl>{{proj.description|typogrify}}</dl>
 {% endfor %}
-</ul>
+</dl>
+{% endblock %}

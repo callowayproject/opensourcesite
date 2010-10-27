@@ -1,10 +1,8 @@
 {% extends "viewpoint/viewpoint_base.html" %}
-
+{% block head_title %}Articles Written Today{% endblock %}
 {% block content %}
-	<h1>Entry Archive {{ day|date:"F d Y" }}</h1>
-	<ul>
-	{% for object in object_list %}
-		<li><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></li>
+	<h1>Articles Written Today</h1>
+	{% for entry in object_list %}
+		{% include "viewpoint/entry_list_item.html" %}
 	{% endfor %}
-	</ul>
 {% endblock %}

@@ -7,7 +7,9 @@
 {% tags_for_model viewpoint.Entry as tags with counts %}
 <ul>
     {% for tag in tags %}
-        <li><a href="{% url tagging_ext_tag tag.name|slugify %}">{{ tag.name }}</a> ({{ tag.count }})</li>
+        <li><a href="{% url tagging_tag tag.name|slugify %}">
+			<img src="/media/static/images/icons/tag_yellow.png" alt="Topics" width="16" height="16" class="icon" />
+			{{ tag.name }}</a> ({{ tag.count }})</li>
     {% endfor %}
 </ul>
 {% endblock %}
