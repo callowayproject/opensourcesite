@@ -20,21 +20,20 @@ TEMPLATE_DEBUG = DEBUG
 from calloway.settings import *
 
 ADMINS = (
-    ('coordt', 'webdev@washingtontimes.com'),
+    ('webmaster', 'webdev@washingtontimes.com'),
 )
 MANAGERS = ADMINS
 DEFAULT_FROM_EMAIL='webdev@washingtontimes.com'
 SERVER_EMAIL='webdev@washingtontimes.com'
 
-SECRET_KEY = '2n_gflc0@e^v&9^j)yc4dl_qy$5favy)n%d#6sa^=ijw36q_ah'
+DATABASES = {
+    'default': {
+        'NAME': 'dev.db',
+        'ENGINE': 'sqlite3',
+    },
+}
 
-DATABASE_ENGINE = 'sqlite3'    # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'dev.db'       # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
-
+CSRF_COOKIE_DOMAIN = ".washingtontimes.com"
 TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
 USE_I18N = True
