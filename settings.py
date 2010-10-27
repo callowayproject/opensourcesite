@@ -136,6 +136,13 @@ ADMIN_TOOLS_MENU = 'menu.CustomMenu'
 TINYMCE_JS_URL = '%sjs/tiny_mce/tiny_mce.js' % STATIC_URL
 TINYMCE_JS_ROOT = os.path.join(STATIC_ROOT, 'js/tiny_mce')
 
+MMEDIA_DEFAULT_STORAGE = 'media_storage.MediaStorage'
+MMEDIA_IMAGE_UPLOAD_TO = 'image/%Y/%m/%d'
+
+VIEWPOINT_DEFAULT_STORAGE = 'media_storage.MediaStorage'
+TOPICS_DEFAULT_STORAGE = 'media_storage.MediaStorage'
+
+
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.version.VersionDebugPanel',
     'debug_toolbar.panels.timer.TimerDebugPanel',
