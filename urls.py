@@ -16,47 +16,28 @@ sitemaps = {
 
 homepage_entries = {
     'entries': Entry.objects.published,
-    'staffmembers': StaffMember.objects.filter(is_active=True)
 }
-
-tagged_models = (dict(
-    title="Blog Posts",
-    query=lambda tag: TaggedItem.objects.get_by_model(Entry, tag).filter(public=True),
-  ),
-)
-
-tagging_ext_kwargs = {
-  'tagged_models':tagged_models,
-}
-
-post_tag_kwargs = {'model':'entry'}
-post_tag_kwargs.update(tagging_ext_kwargs)
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^blog/', include('viewpoint.urls')),
     url(
-        r'^post/tags/(?P<tag>.+)', 
-        'tagging_ext.views.tag_by_model',
-        kwargs=post_tag_kwargs, 
-        name='tagging_ext_tag_by_model'
+        r'^topics/$', 
+        'django.views.generic.simple.direct_to_template', 
+        {'template':'tagging/index.html'},
+        name='tagging_index'
     ),
     url(
-        r'^tags/$', 
-        'tagging_ext.views.index', 
-        name='tagging_ext_index'
+        r'^topics/(?P<tag>.+)/$', 
+        'django.views.generic.simple.direct_to_template', 
+        {'template':'tagging/tag.html'},
+        name='tagging_tag'
     ),
     url(
-        r'^tags/(?P<tag>.+)/$', 
-        'tagging_ext.views.tag',
-        kwargs=tagging_ext_kwargs, 
-        name='tagging_ext_tag'
-    ),
-    url(
-        r'^tags/(?P<tag>.+)/(?P<model>.+)$', 
-        'tagging_ext.views.tag_by_model',
-        kwargs=tagging_ext_kwargs, 
-        name='tagging_ext_tag_by_model'
+        r'^projects/$', 
+        'django.views.generic.simple.direct_to_template', 
+        {'template':'github_projects.html'},
+        name="projects"
     ),
     url(
         r'^$', 
@@ -64,7 +45,10 @@ urlpatterns = patterns('',
         {'template':'homepage.html', 'extra_context': homepage_entries},
         name="home"
     ),
+    ('', include('djangopypi.urls')),
 )
+
+
 from calloway.urls import urlpatterns as calloway_patterns
 
 urlpatterns += calloway_patterns
