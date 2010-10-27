@@ -2,10 +2,11 @@
 		ServerAdmin webdev@washingtontimes.com
 		ServerName osv2
 		ServerAlias media-osv2
+		#ServerAlias opensource
 		DocumentRoot /var/code/osv2/media
 
-		WSGIDaemonProcess osv2 user=webdev group=webdev processes=3 threads=1 maximum-requests=1000 python-path=/home/webdev/.virtualenvs/osv2/lib/python2.5/site-packages
-		WSGIProcessGroup osv2
+		#WSGIDaemonProcess osv2 user=webdev group=webdev processes=3 threads=1 maximum-requests=1000 python-path=/home/webdev/.virtualenvs/osv2/lib/python2.5/site-packages
+		#WSGIProcessGroup osv2
 		WSGIScriptAlias / /var/code/osv2/conf/osv2.wsgi
 		
 		Alias /media /var/code/osv2/media
@@ -31,5 +32,4 @@
 		<Directory /home/webdev/.virtualenvs/osv2/lib/python2.5/site-packages/django/contrib/admin/media>
 			SetHandler None
 		</Directory>
-		
 </VirtualHost>
