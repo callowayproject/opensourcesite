@@ -13,21 +13,26 @@
 <h1 class="sitehead mb">Open Source at The Washington Times</h1>
 	<div id="menu_container">
 	<ul id="sbmenu">
-		<li><a href="/" title="Home"><img src="/media/static/images/icons/house.png" alt="Home" width="16" height="16" />Home</a></li>
-		<li class="closed"><a href="{% url viewpoint_blog_detail 'default' %}" class="title"><img src="/media/static/images/icons/folder_page_white.png" alt="Articles" width="16" height="16" />Articles</a>
-			<ul style="display: none">
-				<li><a href="{% url viewpoint_blog_archive_year 'default' 2009 %}">2009</a></li>
-				<li><a href="{% url viewpoint_blog_archive_year 'default' 2010 %}">2010</a></li>
-			</ul>
-		</li>
-		<li class="closed"><a href="#"><img src="/media/static/images/icons/tag_yellow.png" alt="Topics" width="16" height="16" />Article Topics</a></li>
-		<li class="closed"><a href="#"><img src="/media/static/images/icons/group.png" alt="Team Members" width="16" height="16" />Team Members</a>
-			<ul style="display: none">{% staff_members as staffmembers %}{% for staff in staffmembers %}
-				<li><a href="{{staff.get_absolute_url}}">{{staff.get_full_name}}</a></li>
-			{% endfor %}</ul>
-		</li>
-		<li class="open"><a href="#"><img src="/media/static/images/icons/package.png" alt="Projects" width="16" height="16" />Projects</a>
-		</li>
+		<li><a href="/" title="Home">
+			<img src="/media/static/images/icons/house.png" alt="Home" width="16" height="16" class="icon" />
+			Home
+		</a></li>
+		<li><a href="{% url viewpoint_blog_detail %}" class="title">
+			<img src="/media/static/images/icons/folder_page_white.png" alt="Articles" width="16" height="16" class="icon" />
+			Articles
+		</a></li>
+		<li><a href="{% url tagging_index %}">
+			<img src="/media/static/images/icons/tag_yellow.png" alt="Topics" width="16" height="16" class="icon" />
+			Article Topics
+		</a></li>
+		<li><a href="{% url staff_index %}">
+			<img src="/media/static/images/icons/group.png" alt="Team Members" width="16" height="16" class="icon" />
+			Team Members
+			</a></li>
+		<li><a href="{% url projects %}">
+			<img src="/media/static/images/icons/package.png" alt="Projects" width="16" height="16" class="icon" />
+			Projects
+			</a></li>
 	</ul>
 	</div>
 {% endblock %}
