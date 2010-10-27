@@ -142,6 +142,8 @@ MMEDIA_IMAGE_UPLOAD_TO = 'image/%Y/%m/%d'
 VIEWPOINT_DEFAULT_STORAGE = 'media_storage.MediaStorage'
 TOPICS_DEFAULT_STORAGE = 'media_storage.MediaStorage'
 
+VIEWPOINT_DEFAULT_BLOG = 'default'
+VIEWPOINT_AUTHOR_MODEL = 'staff.staffmember'
 
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.version.VersionDebugPanel',
