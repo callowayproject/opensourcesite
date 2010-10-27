@@ -12,6 +12,6 @@ django-profiles==0.2
 django-tagging-ext==0.2.0
 django-disqus==0.3.3
 
-titlecase==0.5.1
+setup/titlecase-0.5.1.tar.gz
 smartypants==1.6.0.3
 http://typogrify.googlecode.com/files/typogrify-1.0.tar.gz
