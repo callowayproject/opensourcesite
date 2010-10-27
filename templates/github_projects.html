@@ -2,12 +2,12 @@
 {% load native typogrify %}
 {% block head_title %}Our Open Source Projects{% endblock %}
 {% block body %}
-<h1>Our Open Source Projects</h1>
+<h1 class="mb pb">Our Open Source Projects</h1>
 {% github_projects as projects %}
 <dl>
 {% for proj in projects %}
 	<dt><a href="{{ proj.url }}">{{ proj.name }}</a></dt>
-	<dl>{{proj.description|typogrify}}</dl>
+	<dd>{{proj.description|typogrify}}</dd>
 {% endfor %}
 </dl>
 {% endblock %}
