@@ -1,5 +1,6 @@
 {% extends 'site_base.html' %}
 {% load transmogrifiers %}
+{% block head_title %}{{ object}}{% endblock %}
 {% block body %}
 	<h1 class="mb">{{ object}}</h1>
 	<img src="{% resize object.photo.url 200 %}" alt="{{ object.get_full_name }}" class="left mb" />
