@@ -1,0 +1,11 @@
+{% extends 'site_base.html' %}
+{% load transmogrifiers %}
+{% block body %}
+	<h1 class="mb">Team Members</h1>
+	{% for object in staff %}
+	<div class="module c250 left mb">
+		{% if object.photo %}<a href="{{object.get_absolute_url}}"><img src="{% resize object.photo.url 200 %}" alt="{{ object.get_full_name }}" /></a>{% endif %}
+		<p class="full center"><a href="{{object.get_absolute_url}}">{{object}}</a></p>
+	</div>
+	{% endfor %}
+{% endblock %}

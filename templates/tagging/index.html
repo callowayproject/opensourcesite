@@ -1,0 +1,13 @@
+{% extends "tagging/base.html" %}
+{% load tagging_tags %}
+{% block head_title %}Topics{% endblock %}
+
+{% block body %}
+<h1 class="mb">Topics</h1>
+{% tags_for_model viewpoint.Entry as tags with counts %}
+<ul>
+    {% for tag in tags %}
+        <li><a href="{% url tagging_ext_tag tag.name|slugify %}">{{ tag.name }}</a> ({{ tag.count }})</li>
+    {% endfor %}
+</ul>
+{% endblock %}

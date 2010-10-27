@@ -1,0 +1,12 @@
+{% extends "tagging/base.html" %}
+{% load tagging_tags %}
+{% block head_title %}{{ params.tag }}{% endblock %}
+{% block body %}
+<h1 class="mb">Entries about <em>&ldquo;{{ params.tag }}&rdquo;</em></h1>
+{% tagged_objects params.tag in viewpoint.Entry as entries %}
+<ul>
+	{% for entry in entries %}
+	<li>{% include "viewpoint/entry_list_item.html" %}</li>
+	{% endfor %}
+</ul>
+{% endblock %}
