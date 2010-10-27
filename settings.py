@@ -112,13 +112,11 @@ INSTALLED_APPS = APPS_CORE + \
     APPS_MEDIA + \
     APPS_UTILS + \
     APPS_REGISTRATION + \
-    APPS_TINYMCE + \
-    (
+    APPS_TINYMCE + (
         "viewpoint",
         "profiles",
         "typogrify",
         "transmogrify",
-        "tagging_ext",
         'disqus',
     )
 
