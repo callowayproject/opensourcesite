@@ -209,7 +209,9 @@ def install_pkg(package, version=None):
     if not hasattr(env, 'updated_reqs'):
         set_env(updated_reqs=False)
     
-    pip = "%sbin/python %sbin/pip -q install" % (venv, venv)
+    remote_python = os.path.join(venv, 'bin', 'python')
+    remote_pip = os.path.join(venv, 'bin', 'pip')
+    pip = "%s %s -q install" % (remote_python, remote_pip)
     virtenv = "-E %s" % venv
     extra_idx = "--extra-index-url=http://opensource.washingtontimes.com/pypi/simple/"
     if version is None:
