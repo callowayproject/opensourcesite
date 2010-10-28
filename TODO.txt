@@ -1,9 +1,8 @@
-Add digg, tweet, comments, etc on left side of article. Use library from washtimes
-Blog archive by templates
-Project template
-Team Member template
-Tag article archive template
+Revise each blog entry
+	* convert CodeDiv to mce_icode_container
+	* Convert codehilite to correct icode
+	* Add image
+	* revise path for images in db
 Convert comments to disqus
 Export data
-Check on the ul/li font size in blog articles
 Redirect the old urls to new urls
