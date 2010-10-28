@@ -28,8 +28,8 @@
 			FileETag INode MTime Size
 		</Directory>
 		
-		Alias /admin-media /home/webdev/.virtualenvs/osv2/lib/python2.5/site-packages/django/contrib/admin/media
-		<Directory /home/webdev/.virtualenvs/osv2/lib/python2.5/site-packages/django/contrib/admin/media>
+		Alias /admin-media /home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages/django/contrib/admin/media
+		<Directory /home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages/django/contrib/admin/media>
 			SetHandler None
 		</Directory>
 </VirtualHost>
