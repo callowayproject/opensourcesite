@@ -23,48 +23,45 @@ tinymce.create('tinymce.plugins.icodePlugin', {
 			ed.addCommand('mceicode', function() {
 				ed.windowManager.open({
 					file : url + '/dialog.htm',
-					width: 700 + parseInt(ed.getLang('icode.delta_width', 0)),
-					height: 300 + parseInt(ed.getLang('icode.delta_height', 0)),
+					width: 700 + parseInt(ed.getLang('icode.delta_width', 0), 10),
+					height: 300 + parseInt(ed.getLang('icode.delta_height', 0), 10),
 					inline : 1
 				}, {
-					plugin_url : url, // Plugin absolute URL
-					some_custom_arg : 'custom arg' // Custom argument
+					plugin_url : url
 				});
 			});
 
 			// Register icode button
 			ed.addButton('icode', {
-			title: 'icode.desc',
+			    title: 'Syntax Highlighting for Code',
 				cmd : 'mceicode',
-				image : url + '/img/example.gif'
+				image : url + '/img/icode.png'
 			});
 
-			// Add a node change handler, selects the button in the UI when a image is selected
-			ed.onNodeChange.add(function(ed, cm, n) {
-			cm.setActive('icode', n.nodeName == 'IMG');
+		    ed.onNodeChange.add(this._nodeChange, this);
+			ed.onVisualAid.add(this._visualAid, this);
+		},
+        _nodeChange: function(ed, cm, n) {
+			var p = ed.dom.getParent(n, 'DIV.mce_icode_container');
+            if (p == null)
+                p = ed.dom.getParent(n, 'DIV.codehilite');
+			if (p) {
+				cm.setActive('icode', 1);
+				ed.selection.select(p);
+			} else {
+			    cm.setActive('icode', 0);
+			}
+        },
+        _visualAid : function(ed, e, s) {
+            var dom = ed.dom;
+
+			tinymce.each(dom.select('DIV.mce_icode_container', e), function(e) {
+				if (s)
+					dom.addClass(e, 'mceItemVisualAid');
+				else
+					dom.removeClass(e, 'mceItemVisualAid');	
 			});
 		},
-
-		/**
-		 * Creates control instances based in the incomming name. This method is normally not
-		 * needed since the addButton method of the tinymce.Editor class is a more easy way of adding buttons
-		 * but you sometimes need to create more complex controls like listboxes, split buttons etc then this
-		 * method can be used to create those.
-		 *
-		 * @param {String} n Name of the control to create.
-		 * @param {tinymce.ControlManager} cm Control manager to use inorder to create new control.
-		 * @return {tinymce.ui.Control} New control instance or null if no control was created.
-		 */
-		createControl : function(n, cm) {
-			return null;
-		},
-
-		/**
-		 * Returns information about the plugin as a name/value array.
-		 * The current keys are longname, author, authorurl, infourl and version.
-		 *
-		 * @return {Object} Name/value array containing information about the plugin.
-		 */
 		getInfo : function() {
 			return {
 				longname : 'icode plugin',
