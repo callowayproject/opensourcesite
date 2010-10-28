@@ -3,7 +3,7 @@ from django.conf import settings
 import os
 
 DEFAULT_ROOT = os.path.join(settings.MEDIA_ROOT_PREFIX, 'assets')
-DEFAULT_URL = settings.MEDIA_URL_PREFIX
+DEFAULT_URL = '%sassets' % settings.MEDIA_URL_PREFIX
 
 class MediaStorage(FileSystemStorage):
     def __init__(self, location='', base_url='', *args, **kwargs):
