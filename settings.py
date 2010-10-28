@@ -20,7 +20,7 @@ TEMPLATE_DEBUG = DEBUG
 from calloway.settings import *
 
 ADMINS = (
-    ('webmaster', 'webdev@washingtontimes.com'),
+    ('webmaster', 'webmaster@washingtontimes.com'),
 )
 MANAGERS = ADMINS
 DEFAULT_FROM_EMAIL='webdev@washingtontimes.com'
