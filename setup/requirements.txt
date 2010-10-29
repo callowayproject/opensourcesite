@@ -5,7 +5,8 @@
 
 django
 calloway
-
+viewpoint==0.7.1
+setup/djangopypi-0.4.2beta1.tar.gz
 -r calloway_reqs.txt
 
 django-profiles==0.2
