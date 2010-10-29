@@ -9,24 +9,33 @@
 	WSGIProcessGroup osv2
 	WSGIScriptAlias / /var/code/osv2/conf/osv2.wsgi
 
-	Alias /media /var/code/osv2/media
-	<Directory /var/code/osv2/media>
-		SetHandler None
-		AddOutputFilterByType DEFLATE text/plain
-		AddOutputFilterByType DEFLATE text/xml
-		AddOutputFilterByType DEFLATE application/xhtml+xml
-		AddOutputFilterByType DEFLATE text/css
-		AddOutputFilterByType DEFLATE application/xml
-		AddOutputFilterByType DEFLATE image/svg+xml
-		AddOutputFilterByType DEFLATE application/rss+xml
-		AddOutputFilterByType DEFLATE application/atom_xml
-		AddOutputFilterByType DEFLATE application/x-javascript
-		AddOutputFilterByType DEFLATE application/x-httpd-php
-		AddOutputFilterByType DEFLATE application/x-httpd-fastphp
-		AddOutputFilterByType DEFLATE application/x-httpd-eruby
-		AddOutputFilterByType DEFLATE text/html
-		FileETag INode MTime Size
-	</Directory>
+	ProxyRequests Off
+	<Proxy *>
+		Order deny,allow
+		Allow from all
+	</Proxy>
+
+	ProxyPass /media http://localhost:81/
+	ProxyPassReverse /media http://localhost:81/
+
+	# Alias /media /var/code/osv2/media
+	# <Directory /var/code/osv2/media>
+	#	SetHandler None
+	#	AddOutputFilterByType DEFLATE text/plain
+	#	AddOutputFilterByType DEFLATE text/xml
+	#	AddOutputFilterByType DEFLATE application/xhtml+xml
+	#	AddOutputFilterByType DEFLATE text/css
+	#	AddOutputFilterByType DEFLATE application/xml
+	#	AddOutputFilterByType DEFLATE image/svg+xml
+	#	AddOutputFilterByType DEFLATE application/rss+xml
+	#	AddOutputFilterByType DEFLATE application/atom_xml
+	#	AddOutputFilterByType DEFLATE application/x-javascript
+	#	AddOutputFilterByType DEFLATE application/x-httpd-php
+	#	AddOutputFilterByType DEFLATE application/x-httpd-fastphp
+	#	AddOutputFilterByType DEFLATE application/x-httpd-eruby
+	#	AddOutputFilterByType DEFLATE text/html
+	#	FileETag INode MTime Size
+	# </Directory>
 	
 	Alias /admin-media /home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages/django/contrib/admin/media
 	<Directory /home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages/django/contrib/admin/media>
