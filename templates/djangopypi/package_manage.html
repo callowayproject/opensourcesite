@@ -1,0 +1,10 @@
+{% extends 'djangopypi/djangopypi_base.html' %}
+{% block head_title %}Manage {{ package.name }}{% endblock %}
+{% block body %}
+		<h1>Manage {{ package.name }}</h1>
+		<ul>
+			<form action="" method="post">
+			{{ form.as_p }}
+			<input type="submit" value="Submit" />
+		</ul>
+{% endblock %}

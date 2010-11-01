@@ -1,0 +1,100 @@
+{% extends 'site_base.html' %}
+{% block extra_head %}
+<style type="text/css" media="screen">
+	h1 {
+		margin-bottom:16px;
+	}
+	table {
+		font: 12px 'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;
+	}
+	th {
+		font-weight: bold;
+	    color: #385C78;
+		border-color: #DDD #AAA #AAA #DDD;
+		border-style: solid;
+		border-width: 1px;
+		text-align: left;
+	    background: #E2E2E2; /* old browsers */
+	    background: -moz-linear-gradient(top, #fff 0%, #E2E2E2 100%); /* firefox */
+	    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#E5E2E2)); /* webkit */
+		padding: 6px;
+		text-shadow: rgba(255, 255, 255, 0.597656) 1px 1px;
+	}
+	th.release {
+		background:#fff;
+		text-shadow: none;
+		padding: 2px 2px 2px 6px;
+	}
+	th.release.alt {
+		background: #F0F7FC;
+	}
+	td {
+		border-right: 1px solid #aaa;
+		border-bottom: 1px solid #aaa;
+		background: #fff;
+		color: #342f2c;
+		padding: 2px 2px 2px 6px;
+		height: 2em;
+	}
+	td.alt {
+		background: #F0F7FC;
+	}
+	tr:hover td, tr:hover th.release {
+		background: #DEE6ED;
+		cursor: pointer;
+	}
+	.pagination {
+		margin: 0 auto;
+		margin-top: 12px;
+	}
+	.pagination .page, .pagination .prev, .pagination .next {
+	    background: #E2E2E2; /* old browsers */
+	    background: -moz-linear-gradient(top, #fff 0%, #E2E2E2 100%); /* firefox */
+	    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#E5E2E2)); /* webkit */
+		border-color: #DDD #AAA #AAA #DDD;
+		border-style: solid;
+		border-width: 1px;
+		padding: .4em 1em .3em 1em;
+		color: #213e4b;
+		font: .9em Arial,sans-serif;
+		font-weight: bold;
+		outline: medium none;
+		cursor: pointer;
+		display: inline-block;
+		margin-right: .3em;
+		overflow: visible;
+		position: relative;
+		text-align: center;
+		text-decoration: none!important;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		text-shadow: rgba(255, 255, 255, 0.597656) 1px 1px;
+	}
+	.pagination .page.current, .pagination .disabled {
+		color:#6D0036;
+		background: #fff;
+		cursor: default;
+	}
+	.downloads {
+		padding-top: 1em;
+	}
+	.description p {
+		margin-bottom: 1em;
+	}
+	.description tt {
+		font-size: 85%;
+	}
+</style>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+
+	    $('tr').click(function() {
+	        var href = $(this).find("a").attr("href");
+	        if(href) {
+	            window.location = href;
+	        }
+	    });
+
+	});
+</script>
+{% endblock %}

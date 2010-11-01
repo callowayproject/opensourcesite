@@ -1,0 +1,23 @@
+{% extends 'djangopypi/djangopypi_base.html' %}
+{% load pagination_tags %}
+{% block head_title %}Package Index Releases {% endblock %}
+{% block body %}
+	<h1>Package Index Releases</h1>
+	<table>
+		<thead>
+			<th width="145px">Package</th><th>Version</th><th width="80px">Updated</th><th>Description</th>
+		</thead>
+		<tbody>
+		{% autopaginate release_list 20 %}
+		{% for release in release_list %}
+			<tr>
+		        <th class="release{% cycle '' ' alt' %}"><a href="{{ release.get_absolute_url }}"/>{{ release.package }}</a></th>
+		        <td{% cycle '' ' class="alt"' %}>{{ release.version }}</td>
+		        <td{% cycle '' ' class="alt"' %}>{{ release.created|date:"Y-m-d" }}</td>
+		        <td{% cycle '' ' class="alt"' %}>{{ release.summary }}</td>
+		    </tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	{% paginate %}
+{% endblock %}
