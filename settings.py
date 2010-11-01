@@ -118,6 +118,7 @@ INSTALLED_APPS = APPS_CORE + \
         "typogrify",
         "transmogrify",
         'disqus',
+        'djangopypi',
     )
 
 TEMPLATE_CONTEXT_PROCESSORS = [
