@@ -4,7 +4,7 @@
 		<div class="imgcontainer" style="width: 600px">
 		<img src="{% resize entry.photo.url 600 %}" alt="{{ entry.title }}{% if entry.credit %} {{entry.credit}}" class="no-margin" {% else %} class="no-margin mb" {% endif %} />
 		{% if entry.credit %}
-			Photo by <p class="small caption full" style="text-align: right">{{ entry.credit|safe }}</p>
+			<p class="small caption full" style="text-align: right">Photo by {{ entry.credit|safe }}</p>
 		{% endif %}
 		</div>
 	{% endif %}
