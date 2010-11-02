@@ -10,7 +10,7 @@
 	{% endif %}
 	<h1 class="min mb big sans"><a href="{{ entry.get_absolute_url }}">{{ entry.title|titlecase|typogrify }}</a></h1>
 	<p>by <a href="{{ entry.author.get_absolute_url }}">{{ entry.author }}</a>&nbsp;&bull;&nbsp;Published {{ entry.pub_date.day }} {{ entry.pub_date|date:"M" }} {{ entry.pub_date|date:"Y" }}</p>
-	<p class="mb">{% if entry.tease %}
+	<p class="mb hyphenate">{% if entry.tease %}
 		{{ entry.tease|typogrify }}
 	{% else %}
 		{{ entry.body|typogrify|truncatewords:"20" }}
