@@ -14,17 +14,17 @@
 		{% else %}
 			{{ entry.body|typogrify|truncatewords:"20" }}
 		{% endif %}</p>
-		<p href="{{ entry.get_absolute_url }}#comments"><img src="{{ STATIC_URL}}images/icons/comments.png" width="16" height="16" alt="comments" />99 comments</a> 99 Diggs 99 Whatevers</p>
-		<div class="tags">
+		<p><img src="{{ STATIC_URL}}images/icons/comments.png" width="16" height="16" alt="comments" class="icon mr"/>&nbsp;<a href="{{ entry.get_absolute_url }}#disqus_thread">Comments</a></p>
+		<p class="tags">
 			{% tags_for_object entry as tags %}
-			<img src="{{ STATIC_URL }}/images/icons/tag_yellow.png" width="16" height="16" />
+			<img src="{{ STATIC_URL }}/images/icons/tag_yellow.png" width="16" height="16" alt="tag" class="icon mr" />&nbsp;
 			{% for tag in tags %}
-				{% if not forloop.last %}
-					<a href="/post/tags/{{ tag.slug }}/">{{ tag }}</a> - 
-				{% else %}
-					<a href="/post/tags/{{ tag.slug }}/">{{ tag }}</a>
-				{% endif %}
+			{% if not forloop.last %}
+				<a href="{% url tagging_tag tag %}">{{ tag }}</a> - 
+			{% else %}
+				<a href="{% url tagging_tag tag %}">{{ tag }}</a>
+			{% endif %}
 			{% endfor %}
-		</div>
+		</p>
 	</div>
 </div>

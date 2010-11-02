@@ -1,5 +1,5 @@
 {% extends "site_base.html" %}
-{% load tagging_tags typogrify transmogrifiers %}
+{% load tagging_tags typogrify transmogrifiers disqus_tags %}
 
 {% block head_title %}Home{% endblock %}
 {% block body %}
@@ -12,4 +12,7 @@
 		{% endif %}
 	{% endfor %}
 	</div>
+{% endblock %}
+{% block extra_body %}
+{% disqus_num_replies %}
 {% endblock %}
