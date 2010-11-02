@@ -288,6 +288,7 @@ h1, .h1 {
 	letter-spacing: -0.05em;
 	font-family: "Trebuchet MS", Arial, sans-serif;
     line-height: 0.95em;
+    margin-bottom: .5em;
 }
 
 h2, .h2 {
@@ -306,6 +307,7 @@ h3, .h3 {
 	color: #9d302f;
 	font-family: "Trebuchet MS", Arial, sans-serif;
     line-height: 0.95em;
+    margin-bottom: 1em;
 }
 
 h4, .h4 {
