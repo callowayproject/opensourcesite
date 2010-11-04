@@ -5,6 +5,7 @@ import os
 
 from tagging.models import TaggedItem
 from viewpoint.models import Entry
+from viewpoint.feeds import LatestEntries
 from staff.models import StaffMember
 
 admin.autodiscover()
@@ -47,6 +48,12 @@ urlpatterns = patterns('django.views.generic.simple',
 urlpatterns += patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^blog/', include('viewpoint.urls')),
+    url(
+        r'^feeds/posts/all/$',
+        'django.contrib.syndication.views.feed',
+        {'feed_dict': {'all': LatestEntries}, 'url': 'all'},
+        name="rss_feed"
+    ),
     url(
         r'^topics/$', 
         'django.views.generic.simple.direct_to_template', 
