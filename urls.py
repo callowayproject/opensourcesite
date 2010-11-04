@@ -4,6 +4,7 @@ from django.contrib import admin
 import os
 
 from tagging.models import TaggedItem
+from feeds import TagFeed
 from viewpoint.models import Entry
 from viewpoint.feeds import LatestEntries
 from staff.models import StaffMember
@@ -52,6 +53,12 @@ urlpatterns += patterns('',
         r'^feeds/posts/all/$',
         'django.contrib.syndication.views.feed',
         {'feed_dict': {'all': LatestEntries}, 'url': 'all'},
+        name="rss_feed"
+    ),
+    url(
+        r'^feeds/posts/(?P<url>.+)/$',
+        'django.contrib.syndication.views.feed',
+        {'feed_dict': {'with_tag': TagFeed},},
         name="rss_feed"
     ),
     url(
