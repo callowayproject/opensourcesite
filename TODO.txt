@@ -1,8 +1,7 @@
-Revise each blog entry
-	* convert CodeDiv to mce_icode_container
-	* Convert codehilite to correct icode
-	* Add image
-	* revise path for images in db
-Convert comments to disqus
-Export data
-Redirect the old urls to new urls
+Update css in static
+Check tag feed urls
+
+
+-- Post launch
+
+Add mmimage plugin to tinymce
