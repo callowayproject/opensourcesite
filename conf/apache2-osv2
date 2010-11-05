@@ -2,7 +2,7 @@
 	ServerAdmin webdev@washingtontimes.com
 	ServerName osv2.washingtontimes.com
 	ServerAlias media-osv2.washingtontimes.com
-	#ServerAlias opensource.washingtontimes.com
+	ServerAlias opensource.washingtontimes.com
 	DocumentRoot /var/code/osv2/media
 
 	WSGIDaemonProcess osv2 user=webdev group=webdev processes=3 threads=1 maximum-requests=1000 python-path=/home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages
