@@ -9,7 +9,8 @@
     {% for tag in tags %}
         <li><a href="{% url tagging_tag tag.name|slugify %}">
 			<img src="/media/static/images/icons/tag_yellow.png" alt="Topics" width="16" height="16" class="icon" />
-			{{ tag.name }}</a> ({{ tag.count }})</li>
+			{{ tag.name }}</a> ({{ tag.count }}) <a href="{% url rss_tag_feed "with_tag" %}{{tag}}/"><img src="{{ STATIC_URL }}images/icons/feed.png" width="16" height="16" alt="RSS Feed" class="icon" /></a>
+		</li>
     {% endfor %}
 </ul>
 {% endblock %}
