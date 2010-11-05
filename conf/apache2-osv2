@@ -5,7 +5,7 @@
 	ServerAlias opensource.washingtontimes.com
 	DocumentRoot /var/code/osv2/media
 
-	WSGIDaemonProcess osv2 user=webdev group=webdev processes=3 threads=1 maximum-requests=1000 python-path=/home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages
+	WSGIDaemonProcess osv2 user=www-data group=www-data processes=3 threads=1 maximum-requests=1000 python-path=/home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages
 	WSGIProcessGroup osv2
 	WSGIScriptAlias / /var/code/osv2/conf/osv2.wsgi
 
@@ -37,8 +37,8 @@
 	#	FileETag INode MTime Size
 	# </Directory>
 	
-	Alias /admin-media /home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages/django/contrib/admin/media
-	<Directory /home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages/django/contrib/admin/media>
+	Alias /admin-media /var/code/osv2/media/static/admin-media
+	<Directory /var/code/osv2/media/static/admin-media>
 		SetHandler None
 	</Directory>
 </VirtualHost>
