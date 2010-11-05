@@ -1,13 +1,16 @@
 {% extends 'site_base.html' %}
-{% load transmogrifiers %}
+{% load transmogrifiers disqus_tags %}
 {% block head_title %}{{ object}}{% endblock %}
 {% block body %}
 	<h1 class="mb">{{ object}}</h1>
-	<img src="{% resize object.photo.url 200 %}" alt="{{ object.get_full_name }}" class="left mb" />
+	{% if obj.photo %}<img src="{% resize object.photo.url 200 %}" alt="{{ object.get_full_name }}" class="left mb" />{% endif %}
 	{{ object.bio|safe }}
 	<div class="module entrylist clear-b mt">
 		{% for entry in object.entry_set.published %}
 			{% include "viewpoint/entry_list_item.html" %}
 		{% endfor %}
 	</div>
+{% endblock %}
+{% block extra_body %}
+{% disqus_num_replies %}
 {% endblock %}
