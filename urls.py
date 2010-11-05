@@ -59,7 +59,7 @@ urlpatterns += patterns('',
         r'^feeds/posts/(?P<url>.+)/$',
         'django.contrib.syndication.views.feed',
         {'feed_dict': {'with_tag': TagFeed},},
-        name="rss_feed"
+        name="rss_tag_feed"
     ),
     url(
         r'^topics/$', 
