@@ -1,9 +1,15 @@
+<AuthnProviderAlias wsgi django>
+	WSGIAuthUserScript /var/code/osv2/conf/auth.wsgi
+</AuthnProviderAlias>
+
 <VirtualHost *:80>
 	ServerAdmin webdev@washingtontimes.com
 	ServerName osv2.washingtontimes.com
 	ServerAlias media-osv2.washingtontimes.com
 	ServerAlias opensource.washingtontimes.com
 	DocumentRoot /var/code/osv2/media
+
+	CustomLog /var/log/apache2/access.log combined
 
 	WSGIDaemonProcess osv2 user=www-data group=www-data processes=3 threads=1 maximum-requests=1000 python-path=/home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages
 	WSGIProcessGroup osv2
@@ -18,27 +24,33 @@
 	ProxyPass /media http://localhost:81/
 	ProxyPassReverse /media http://localhost:81/
 
-	# Alias /media /var/code/osv2/media
-	# <Directory /var/code/osv2/media>
-	#	SetHandler None
-	#	AddOutputFilterByType DEFLATE text/plain
-	#	AddOutputFilterByType DEFLATE text/xml
-	#	AddOutputFilterByType DEFLATE application/xhtml+xml
-	#	AddOutputFilterByType DEFLATE text/css
-	#	AddOutputFilterByType DEFLATE application/xml
-	#	AddOutputFilterByType DEFLATE image/svg+xml
-	#	AddOutputFilterByType DEFLATE application/rss+xml
-	#	AddOutputFilterByType DEFLATE application/atom_xml
-	#	AddOutputFilterByType DEFLATE application/x-javascript
-	#	AddOutputFilterByType DEFLATE application/x-httpd-php
-	#	AddOutputFilterByType DEFLATE application/x-httpd-fastphp
-	#	AddOutputFilterByType DEFLATE application/x-httpd-eruby
-	#	AddOutputFilterByType DEFLATE text/html
-	#	FileETag INode MTime Size
-	# </Directory>
-	
 	Alias /admin-media /var/code/osv2/media/static/admin-media
 	<Directory /var/code/osv2/media/static/admin-media>
 		SetHandler None
 	</Directory>
+	
+	SetEnv GIT_PROJECT_ROOT /var/code/git
+	SetEnv GIT_HTTP_EXPORT_ALL
+	ScriptAlias /git/ /usr/local/libexec/git-core/git-http-backend/
+	
+	<LocationMatch "^/git/public/.*/git-receive-pack$">
+		AuthType Basic
+		AuthName "Your Repository"
+		AuthBasicProvider django
+		SetEnv DJANGO_SETTINGS_MODULE opensource.settings
+
+		PythonPath "['/home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages/']+sys.path"
+		PythonPath "['/var/code/','/var/code/opensource/externalapps']+sys.path"
+		PythonPath "['/var/code/opensource/externalapps/projectmgr/bin',]+sys.path"
+	</LocationMatch>
+	<Location /git/private>
+		AuthType Basic
+		AuthName "Your Repository"
+				AuthBasicProvider django
+		SetEnv DJANGO_SETTINGS_MODULE opensource.settings
+			PythonPath "['/home/webdev/.virtualenvs/opensource/lib/python2.6/site-packages/']+sys.path"
+			PythonPath "['/var/code/','/var/code/opensource/externalapps']+sys.path"
+			PythonPath "['/var/code/opensource/externalapps/projectmgr/bin',]+sys.path"
+		Require valid-user
+	</Location>
 </VirtualHost>
