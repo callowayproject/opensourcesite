@@ -1,6 +1,9 @@
 {% extends "tagging/base.html" %}
 {% load tagging_tags %}
 {% block head_title %}Articles About {{ params.tag }}{% endblock %}
+{% block extra_head %}
+	<link rel="alternate" href="{% url rss_tag_feed "with_tag" %}{{params.tag}}/" type="application/rss+xml" title="RSS 2.0" charset="utf-8">
+{% endblock %}
 {% block body %}
 <h1 class="mb">Articles about <em>&ldquo;{{ params.tag }}&rdquo;</em></h1>
 {% tagged_objects params.tag in viewpoint.Entry as entries %}
