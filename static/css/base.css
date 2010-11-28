@@ -467,6 +467,21 @@ dd {
     font-weight: normal;
 }
 
+ul.dirtree {
+	list-style: none;
+}
+ul.dirtree li.dir {
+	list-style: none;
+	background-image: url(http://opensource.washingtontimes.com/media/static/images/icons/folder.png);
+	background-repeat: no-repeat;
+	padding-left: 20px;
+}
+ul.dirtree li.file {
+	background-image: url(http://opensource.washingtontimes.com/media/static/images/icons/page_white.png);
+	background-repeat: no-repeat;
+	padding-left: 20px;
+	list-style: none;
+}
 
 a.button {
     background: #E2E2E2; /* old browsers */
