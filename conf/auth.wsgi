@@ -6,9 +6,10 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, os.path.join(PROJECT_ROOT,"apps"))
 sys.path.insert(0, os.path.join(PROJECT_ROOT,"lib"))
 sys.path.insert(0, PROJECT_ROOT)
+sys.path.insert(0, os.path.dirname(PROJECT_ROOT))
 
 sys.stdout = sys.stderr
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'osv2.settings'
 
 from django.contrib.auth.models import User
 from django import db
@@ -16,7 +17,7 @@ from django import db
 def check_password(environ, user, password):
     db.reset_queries() 
 
-    kwargs = {'username': user, 'is_active': True} 
+    kwargs = {'username': user, 'is_active': True, 'is_staff': True} 
 
     try: 
         try: 
