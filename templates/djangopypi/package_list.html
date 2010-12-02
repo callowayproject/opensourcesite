@@ -1,10 +1,22 @@
 {% extends 'djangopypi/djangopypi_base.html' %}
+{% load pagination_tags %}
 {% block head_title %}Package Index{% endblock %}
 {% block body %}
 	<h1>Package Index</h1>
-	<ul>
+	<table>
+		<thead>
+			<th width="145px">Package</th><th>Current Version</th><th>Description</th>
+		</thead>
+		<tbody>
+		{% autopaginate package_list 20 %}
 		{% for package in package_list %}
-		<li><a href="{{ package.get_absolute_url }}">{{ package.name }}</a>{% if package.latest and package.latest.summary %}: {{ package.latest.summary }}{% endif %}</li>
+			<tr>
+				<th class="release{% cycle '' ' alt' %}"><a href="{{ package.get_absolute_url }}"/>{{ package.name }}</a></th>
+				<td{% cycle '' ' class="alt"' %}>{% if package.latest and package.latest.summary %}{{ package.latest.version }}{% endif %}</td>
+				<td{% cycle '' ' class="alt"' %}>{% if package.latest and package.latest.summary %}{{ package.latest.summary }}{% endif %}</td>
+			</tr>
 		{% endfor %}
-	</ul>
+		</tbody>
+	</table>
+	{% paginate %}
 {% endblock %}

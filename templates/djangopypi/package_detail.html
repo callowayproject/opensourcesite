@@ -9,17 +9,58 @@
 	<h1>{{ package.name }}</h1>
 	{% if package.latest %}
 		{% with package.latest as release %}
-			<div class="description">
-			{{ release.description|saferst }}
+			<div class="summary">
+				<p>{{ release.summary }}</p>
 			</div>
-			{% if release.distributions.count %}
-				<div class="downloads">
+			<ul><li><a href="#downloads">To Downloads</a></li>
+				<li><a href="#metadata">To Metadata</a></li>
+			</ul>
+			<div class="description">
+				<h2>Description</h2>
+				{{ release.description|saferst }}
+			</div>
+			<a name="downloads"></a>
+			<div class="downloads">
 				<h2>Downloads</h2>
+				{% if release.distributions.count %}
 				<ul>{% for dist in release.distributions.all %}
 					<li><a href="{{ dist.get_absolute_url }}">{{ dist }}</a> ({{ dist.content.size|filesizeformat }})</li>
 				{% endfor %}</ul>
-				</div>
-			{% endif %}	
+				{% else %}
+				<p>No downloads.</p>
+				{% endif %}
+			</div>
+			<a name="Metadata"></a>
+			<div class="metadata">
+				<h2>Metadata</h2>
+				<ul>
+					{% if release.package_info.author %}
+					<li><strong>Author:</strong>{{ release.package_info.author }}</li>
+					{% endif %}
+					{% if release.package_info.author_email %}
+					<li><strong>Author Email:</strong>{{ release.package_info.author_email }}</li>
+					{% endif %}
+					{% if release.package_info.home_page %}
+					<li><strong>Home Page:</strong><a href="{{release.package_info.home_page}}">{{release.package_info.home_page }}</a></li>
+					{% endif %}
+					{% if release.package_info.download_url %}
+					<li><strong>Download:</strong><a href="{{release.package_info.download_url}}">{{release.package_info.download_url }}</a></li>
+					{% endif %}
+					{% if release.package_info.license %}
+					<li><strong>License:</strong>{{release.package_info.license}}</li>
+					{% endif %}
+					{% if release.package_info.platform %}
+					<li><strong>License:</strong>{{release.package_info.platform}}</li>
+					{% endif %}
+					{% if release.classifiers %}
+					<li><strong>Classifiers:</strong><ul>
+						{% for classifier in release.classifiers %}
+							<li>{{ classifier }}</li>
+						{% endfor %}
+					</ul></li>
+					{% endif %}
+				</ul>
+			</div>
 		{% endwith %}
 	{% else %}
 		<div>No releases yet!</div>

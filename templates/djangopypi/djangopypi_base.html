@@ -94,7 +94,13 @@
 	            window.location = href;
 	        }
 	    });
-
 	});
 </script>
+{% endblock %}
+{% block content_nav %}
+<ul class="nav">
+	<li><a href="{% url djangopypi-package-index %}">Packages</a></li>
+	<li><a href="{% url djangopypi-release-index %}">Releases</a></li>
+	<li><a href="{% url djangopypi-package-index-simple %}">Simple List</a></li>
+</ul>
 {% endblock %}
