@@ -14,6 +14,7 @@
 	WSGIDaemonProcess osv2 user=www-data group=www-data processes=3 threads=1 maximum-requests=1000 python-path=/home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages
 	WSGIProcessGroup osv2
 	WSGIScriptAlias / /var/code/osv2/conf/osv2.wsgi
+	WSGIPassAuthorization On
 
 	ProxyRequests Off
 	<Proxy *>
