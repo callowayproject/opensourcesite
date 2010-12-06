@@ -40,18 +40,14 @@
 		AuthBasicProvider django
 		SetEnv DJANGO_SETTINGS_MODULE opensource.settings
 
-		PythonPath "['/home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages/']+sys.path"
-		PythonPath "['/var/code/','/var/code/opensource/externalapps']+sys.path"
-		PythonPath "['/var/code/opensource/externalapps/projectmgr/bin',]+sys.path"
+		PythonPath "['/home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages/','/var/code/']+sys.path"
 	</LocationMatch>
 	<Location /git/private>
 		AuthType Basic
 		AuthName "Your Repository"
 				AuthBasicProvider django
 		SetEnv DJANGO_SETTINGS_MODULE opensource.settings
-			PythonPath "['/home/webdev/.virtualenvs/opensource/lib/python2.6/site-packages/']+sys.path"
-			PythonPath "['/var/code/','/var/code/opensource/externalapps']+sys.path"
-			PythonPath "['/var/code/opensource/externalapps/projectmgr/bin',]+sys.path"
+		PythonPath "['/home/webdev/.virtualenvs/osv2/lib/python2.6/site-packages/','/var/code/']+sys.path"
 		Require valid-user
 	</Location>
 </VirtualHost>
